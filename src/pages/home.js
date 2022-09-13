@@ -1,9 +1,13 @@
-import { Component } from 'react';
+
 import './home.css'
 import  styled  from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import SwiperCore, {Navigation, Pagination} from 'swiper';
+import 'swiper/css/navigation'
+SwiperCore.use([Navigation,Pagination])
 
 const Home = () => {
-
   const freeLectures = [
     {
       img : "https://cdn.inflearn.com/public/courses/328577/cover/d7cd62c2-db07-45d8-af8d-a3fa728cd8e7/inflearn-logo.jpg",
@@ -39,14 +43,56 @@ const Home = () => {
     },
     {
       img : "https://cdn.inflearn.com/public/course-326295-cover/eaba30bd-b9ec-4277-b178-a418b5daf1a3",
-      title : "Svelte.js 입문 가이드",
+      title: "Svelte.js 입문 가이드",
       tutor: "HEROPY",
       score: "(114)",
       cost: "무료",
       tutee: "+1800명"
     },
+    // 5
+    {
+      img: "https://cdn.inflearn.com/public/course-324063-cover/3c856a69-e213-4394-8317-1469386b82cc",
+      title: "웹 게임을 만들며 배우는 React",
+      tutor: "조현영",
+      score: "(239)",
+      cost: "무료",
+      tutee: "+8900명"
+    },
+    {
+      img: "https://cdn.inflearn.com/public/courses/328431/cover/27200e19-6296-4eb5-8d9d-4dcfc1189758/REALNEW_THUMB.001.jpeg",
+      title: "기초부터 따라하는 디지털포렌식",
+      tutor: "손지훈",
+      score: "(26)",
+      cost: "무료",
+      tutee: "+1200명"
+    },
+    {
+      img: "https://cdn.inflearn.com/public/courses/327067/cover/141fa9cb-69ed-48ca-8de2-d205b0e09200/썸네일_하드웨어_fin.png",
+      title: "컴알못이 보는 컴퓨터 하드웨어 기초 상식",
+      tutor: "제주코딩베이스캠프",
+      score: "(99)",
+      cost: "무료",
+      tutee: "+2700명"
+    },
+    {
+      img: "https://cdn.inflearn.com/public/courses/325123/course_cover/7867a30d-49f9-4312-89f5-b0e883db8a4e/시빅해킹-썸넬.png",
+      title: "Microcosm SW Fair - 경쟁없는, 나만의 시빅해킹",
+      tutor: "제주코딩베이스캠프",
+      score: "(12)",
+      cost: "무료",
+      tutee: "+500명"
+    },
+    {
+      img: "https://cdn.inflearn.com/public/courses/329130/cover/99c5a76f-a0c0-4c7d-8667-1ec13bf9b0cb/329130-eng-resize.png",
+      title: "30분 요약강좌 시즌5 : 알잘딱깔센 flex & grid",
+      tutor: "제주코딩베이스캠프",
+      score: "(7)",
+      cost: "무료",
+      tutee: "+200명"
+    }
   ];
-  const freeLecturesList = freeLectures.map((freeLecture)=>(
+  const freeLecturesList1 = freeLectures.map((freeLecture, idx)=>(
+    (idx<5)?
     <div className="class-card">
       <img src={freeLecture.img} alt="" className="lecture-img"/>
       <div className="lecture-title">{freeLecture.title}</div>
@@ -55,6 +101,21 @@ const Home = () => {
       <div className="lecture-cost">{freeLecture.cost}</div>
       <div className="lecture-tutee">{freeLecture.tutee}</div>
     </div>
+    :
+    <div style={{display:"none"}}></div>
+  ))
+  const freeLecturesList2 = freeLectures.map((freeLecture, idx)=>(
+    (idx>4)?
+    <div className="class-card">
+      <img src={freeLecture.img} alt="" className="lecture-img"/>
+      <div className="lecture-title">{freeLecture.title}</div>
+      <div className="lecture-tutor">{freeLecture.tutor}</div>
+      <div className="lecture-score">⭐⭐⭐⭐⭐<span> {freeLecture.score}</span></div>
+      <div className="lecture-cost">{freeLecture.cost}</div>
+      <div className="lecture-tutee">{freeLecture.tutee}</div>
+    </div>
+    :
+    <div style={{display:"none"}}></div>
   ))
 
   const newbieLectures = [
@@ -366,9 +427,14 @@ const Home = () => {
             <i className="fa-solid fa-chevron-right"></i>
           </div>
           <div className="class-subtitle">무료 강의부터 가볍게 시작해 보세요.</div>
-          <div className="class-cards">
-            {freeLecturesList}
-          </div>
+          <Swiper modules={[Navigation]} navigation>
+            <SwiperSlide>
+              <div className='class-cards'>{freeLecturesList1}</div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className='class-cards'>{freeLecturesList2}</div>
+            </SwiperSlide>                            
+          </Swiper>
         </div>
       </section>
       <section className="class-section">
@@ -378,9 +444,11 @@ const Home = () => {
             <i className="fa-solid fa-chevron-right"></i>
           </div>
           <div className="class-subtitle">이미 검증된 쉽고 친절한 입문 강의!!</div>
-          <div className="class-cards">
-            {newbieLecturesList}
-          </div>
+          <Swiper modules={[Navigation]} navigation loop>
+            <SwiperSlide>
+              <div className="class-cards">{newbieLecturesList}</div>
+            </SwiperSlide>
+          </Swiper>  
         </div>
       </section>
       <section className="class-section">
@@ -391,9 +459,11 @@ const Home = () => {
             <i className="fa-solid fa-chevron-right"></i>
           </div>
           <div className="class-subtitle">아무것도 몰라도 따라오다 보면 전문가가 될 수 있어요!</div>
-          <div className="class-cards">
-            {roadLecturesList}
-          </div>
+          <Swiper modules={[Navigation]} navigation loop>
+            <SwiperSlide>
+            <div className="class-cards">{roadLecturesList}</div>
+            </SwiperSlide>
+          </Swiper> 
         </div>
       </section>
       <section className="class-section">
@@ -414,9 +484,11 @@ const Home = () => {
             <span className="roadmap">NEW!!</span>
             <i className="fa-solid fa-chevron-right"></i>
           </div>
-          <div className="class-cards">
-            {newLecturesList}
-          </div>
+          <Swiper modules={[Navigation]} navigation loop>
+            <SwiperSlide>
+            <div className="class-cards">{newLecturesList}</div>
+            </SwiperSlide>
+          </Swiper> 
         </div>
       </section>
       <Footer>

@@ -185,7 +185,7 @@ nav{
   position: relative;
   width: 1200px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 .page-info{
@@ -310,7 +310,7 @@ nav{
   display: flex;
   width: 580px;
   padding: 8px 0;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .search-tag{
   display: inline-flex;
@@ -341,13 +341,14 @@ nav{
 }
 
 .class-container{
-  width: 1180px;
+  width: 1260px;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .class-maintitle{
+  margin-left: 40px;
   color: #1e1e1e;
   font-size: 24px;
   font-weight: 900;
@@ -361,7 +362,7 @@ nav{
 .class-subtitle{
   font-size: 15px;
   color: #757575;
-  margin: 4px 0 20px;
+  margin: 4px 0 20px 40px;
   line-height: 1.5;
 }
 
@@ -369,7 +370,7 @@ nav{
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 6px 0;
+  padding: 6px 40px;
 }
 .class-card{
   width: 230px;
@@ -513,4 +514,41 @@ nav{
   background-color: hsl(1,100%,89%);
   border-radius: 4px;
   padding: 3px 9px;
+}
+
+.swiper{
+  display: flex;
+  width: 100%;
+}
+
+.swiper-button-prev,
+.swiper-button-next{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 45px 45px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  box-shadow: 0 2px 14px 0 rgb(0 0 0 / 10%)!important;
+  opacity: .76;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+  box-shadow: 0 2px 14px 0 rgb(0 0 0 / 30%)!important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after{
+  color: #333;
+  font-weight: 900;
+}
+
+.swiper-button-next{
+  font-size: 10px;
+  transform: scale(0.48) translate(50%, -50%); 
+}
+
+.swiper-button-prev{
+  font-size: 10px;
+  transform: scale(0.48) translate(-50%, -50%); 
 }
