@@ -1,10 +1,13 @@
-
+import React from 'react';
 import './home.css'
 import  styled  from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import SwiperCore, {Navigation, Pagination} from 'swiper';
-import 'swiper/css/navigation'
+import 'swiper/css/navigation';
+
+import Scene from '../components/sceneComponent'
+
 SwiperCore.use([Navigation,Pagination])
 
 const Home = () => {
@@ -316,6 +319,7 @@ const Home = () => {
       }
     </MenuContent>
   ))
+  
   return(
     <>
       <header>
@@ -368,38 +372,7 @@ const Home = () => {
         </div>
       </nav>
       {/* <!-- MOVING SECTION --> */}
-      <section className="scenes-section">
-        <div className="scenes-container">
-
-        </div>
-      </section>
-      <section className="pages-section">
-        <div className="pages-container">
-          <div className="page-info">
-            <div className="page-number">
-              <span className="now">1</span>/<span className="total">7</span>
-            </div>
-            <div className="page-controll">
-              <i className="btn-back fa-solid fa-chevron-left"></i>
-              <i className="btn-play fa-solid fa-play"></i>
-              <i className="btn-go fa-solid fa-chevron-right"></i>
-            </div>
-          </div>
-          <div className="line"></div>
-          <div className="page-list">
-            <div className="page-list-item">Top 50 👑</div>
-            <div className="page-list-item">지식공유신청</div>
-            <div className="page-list-item">신규 강의 🎁</div>
-            <div className="page-list-item">왕초보 모여라 😎</div>
-            <div className="page-list-item">입문 로드맵</div>
-            <div className="page-list-item">인프런은 🌱</div>
-            <div className="page-list-item">인프런 동료 찾기</div>
-          </div>
-          <div className="page-more">
-            <i className="fa-solid fa-chevron-down"></i>
-          </div>
-        </div>
-      </section>
+      <Scene></Scene>
       {/* <!-- SEARCH SECTION --> */}
       <section className="search-section">
         <div className="search-container">
