@@ -108,9 +108,7 @@ nav{
 .nav-item{
   cursor: pointer;
   padding: 8px 16px;
-}
-.nav-item:hover{
-  color: #1dc078;
+  position: relative;
 }
 .nav-forms{
   display: flex;

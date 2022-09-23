@@ -136,7 +136,7 @@ const Scene = () => {
       setTimeout(()=>{
         if (index<8) { setIndex((index+1)) }
         else { setIndex((index+1)%8) }
-      },2500)
+      },3000)
     }
   })
   
@@ -210,6 +210,8 @@ const Slide = styled.div`
   display: flex;
   justify-content: center;
   transition: .3s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
 `
 
 const NavSection = styled.section`
