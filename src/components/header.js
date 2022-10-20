@@ -5,7 +5,8 @@ import '../pages/home.css'
 import App from './../App';
 import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+
+const Header = (props) => {
   const firstStatus = [false, false, false];
   const secondStatus = [false, false, false, false, false, false, false, false, false];
   const [firstDropOpen, setFirstDropOpen] = useState(firstStatus);
@@ -79,6 +80,10 @@ const Header = () => {
   ))
 
   const navigate = useNavigate();
+  const [blur, setBlur] = useState(false);
+  const sendLoginShow = () => {
+    props.getLoginShow(true)
+  }
 
   return(
     <>
@@ -171,7 +176,7 @@ const Header = () => {
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
             <div className="nav-btns">
-              <button className="btn-login">로그인</button>
+              <button className="btn-login" onClick={sendLoginShow}>로그인</button>
               <button className="btn-signup" onClick={()=>{navigate('/signup')}}>회원가입</button>
             </div>
           </div>

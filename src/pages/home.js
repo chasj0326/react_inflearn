@@ -9,9 +9,10 @@ import 'swiper/css/navigation';
 import Scene from '../components/sceneComponent';
 import Header from '../components/header';
 import Footer from './../components/footer';
-
+import Login from './../components/loginModal';
 
 SwiperCore.use([Navigation,Pagination,Autoplay])
+
 
 const Home = () => {
   const freeLectures = [
@@ -376,236 +377,253 @@ const Home = () => {
       padding: '36px 0px'
     }
   ]
-
-
+  const [loginShow, setLoginShow] = useState(false);
+  const getLoginShow = () => {
+    setLoginShow(!loginShow);
+  }
   return(
-    <>
-      
-      <Header></Header>
-      {/* <!-- MOVING SECTION --> */}
-      <Scene></Scene>
-      {/* <!-- SEARCH SECTION --> */}
-      <section className="search-section">
-        <div className="search-container">
-          <div className="search-title">성장기회의 평등을 추구합니다</div>
-          <div className="search-bar">
-            <input type="text" placeholder="배우고 싶은 지식을 입력해보세요."/>
-            <button><i className="fa-solid fa-magnifying-glass"></i></button>
+    <>  
+        {
+          loginShow?
+          <div style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+            <Header getLoginShow={getLoginShow}/>
           </div>
-          <div className="search-tags">
-            <div className="search-tag">#MVC</div>
-            <div className="search-tag">#Spring Boot</div>
-            <div className="search-tag">#JPA</div>
-            <div className="search-tag">#Python</div>
-            <div className="search-tag">#Java</div>
-            <div className="search-tag">#Spring</div>
-            <div className="search-tag">#JavaScript</div>
-          </div>
+          :
+          <Header getLoginShow={getLoginShow}/>
+        }
+        {
+          loginShow?
+          <Login getLoginShow={getLoginShow}></Login>
+          :
+          <div></div>
+        }
+        {/* <!-- MOVING SECTION --> */}
+        <div style={loginShow?{filter:'blur(4px)'}:{}}>
+          <Scene style={loginShow?{filter:'blur(4px)'}:{}}></Scene>
         </div>
-      </section>
-      {/* <!-- class SECTION1 --> */}
-      <section className="class-section">
-        <div className="class-container">
-          <div className="class-maintitle fw-b">
-            무료강의? 오히려 좋아 ✨
-            <i className="fa-solid fa-chevron-right"></i>
+        {/* <!-- SEARCH SECTION --> */}
+        <section className="search-section" style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <div className="search-container">
+            <div className="search-title">성장기회의 평등을 추구합니다</div>
+            <div className="search-bar">
+              <input type="text" placeholder="배우고 싶은 지식을 입력해보세요."/>
+              <button><i className="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div className="search-tags">
+              <div className="search-tag">#MVC</div>
+              <div className="search-tag">#Spring Boot</div>
+              <div className="search-tag">#JPA</div>
+              <div className="search-tag">#Python</div>
+              <div className="search-tag">#Java</div>
+              <div className="search-tag">#Spring</div>
+              <div className="search-tag">#JavaScript</div>
+            </div>
           </div>
-          <div className="class-subtitle">무료 강의부터 가볍게 시작해 보세요.</div>
-          <Swiper modules={[Navigation]} navigation>
-            <SwiperSlide>
-              <div className='class-cards'>{freeLecturesList1}</div>
+        </section>
+        {/* <!-- class SECTION1 --> */}
+        <section className="class-section" style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <div className="class-container">
+            <div className="class-maintitle fw-b">
+              무료강의? 오히려 좋아 ✨
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <div className="class-subtitle">무료 강의부터 가볍게 시작해 보세요.</div>
+            <Swiper modules={[Navigation]} navigation>
+              <SwiperSlide>
+                <div className='class-cards'>{freeLecturesList1}</div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className='class-cards'>{freeLecturesList2}</div>
+              </SwiperSlide>                            
+            </Swiper>
+          </div>
+        </section>
+        <section className="class-section" style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <div className="class-container">
+            <div className="class-maintitle fw-b">
+              왕초보도 할 수 있어요 💪
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <div className="class-subtitle">이미 검증된 쉽고 친절한 입문 강의!!</div>
+            <Swiper modules={[Navigation]} navigation loop>
+              <SwiperSlide>
+                <div className="class-cards">{newbieLecturesList}</div>
+              </SwiperSlide>
+            </Swiper>  
+          </div>
+        </section>
+        <section className="class-section" style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <div className="class-container">
+            <div className="class-maintitle fw-b">
+              기본부터 실무까지 제시해주는 로드맵 🏃🏻‍♀️
+              <span className="roadmap">RoadMap!!</span>
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <div className="class-subtitle">아무것도 몰라도 따라오다 보면 전문가가 될 수 있어요!</div>
+            <Swiper modules={[Navigation]} navigation loop>
+              <SwiperSlide>
+              <div className="class-cards">{roadLecturesList}</div>
+              </SwiperSlide>
+            </Swiper> 
+          </div>
+        </section>
+        <section className="class-section" style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <div className="class-container">
+            <div className="class-maintitle fw-b">
+              읽어보기
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <div className="class-cards">
+              {readContentsList}
+            </div>
+          </div>
+        </section>
+        <section className="class-section" style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <div className="class-container">
+            <div className="class-maintitle fw-b">
+              따끈따끈, 신규 강의를 만나보세요! 🙋🏻‍♀️
+              <span className="roadmap">NEW!!</span>
+              <i className="fa-solid fa-chevron-right"></i>
+            </div>
+            <Swiper modules={[Navigation]} navigation loop>
+              <SwiperSlide>
+              <div className="class-cards">{newLecturesList}</div>
+              </SwiperSlide>
+            </Swiper> 
+          </div>
+        </section>
+
+        <ReviewSection style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <Container>
+            <LeftContent>
+              <H1><span style={{color:'#47C880'}}>964,904</span> 명이<br/>인프런과 함께합니다</H1>
+              <Textsmall>
+                인프런은 강의의 수강생수, 평점을 투명하게 공개합니다.
+                <br/>
+                실제로 많은 온오프라인 학원들은 단기적 성과를 높이기 위해 잘나온 특정 후기만 노출하거나, 
+                아예 숨겨버리는 경우가 많습니다.
+                <br/>
+                반면 인프런은 강의에 대한 후기, 학생수 등 정보를 투명하게 공개합니다.
+                신뢰성을 바탕으로 학습자들이 더 좋은 컨텐츠를 선택하고 교육의 질을 높입니다.
+              </Textsmall>
+              <MoreBtns>
+                <MoreBtn>수강평 더보기 <i className="fa-solid fa-chevron-right"></i></MoreBtn>
+                <MoreBtn>기능/강좌 요청하기 <i className="fa-solid fa-chevron-right"></i></MoreBtn>
+              </MoreBtns>
+            </LeftContent>
+            <RightContent>
+                {reviewList}
+            </RightContent>
+          </Container>
+        </ReviewSection>
+
+        <Banner style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <Swiper modules={[Autoplay]} autoplay={{delay: 3000}} speed={600} loop>
+            <SwiperSlide style={BannerStyle[0]}>
+              <BannerBox>
+                <BannerText>모든 팀원이 인프런의 강의들을<br/>자유롭게 학습하는 환경을 제공해주세요.</BannerText>
+                <BannerBtn>비즈니스 알아보기</BannerBtn>
+              </BannerBox>
             </SwiperSlide>
-            <SwiperSlide>
-              <div className='class-cards'>{freeLecturesList2}</div>
-            </SwiperSlide>                            
+            <SwiperSlide style={BannerStyle[1]}>
+              <BannerBox>
+                <BannerText>지식을 나눠주세요.<br/>쉽게 시작하고 합당한 보상을 받을 수 있어요.</BannerText>
+                <BannerBtn>지식공유 알아보기</BannerBtn>
+              </BannerBox>
+            </SwiperSlide>
+            <SwiperSlide style={BannerStyle[2]}>
+              <BannerBox>
+                <BannerText style={{color:'white'}}>당신은 더 좋은 곳에 갈 수 있어요.<br/>지금 열려있는 채용공고를 확인해보세요.</BannerText>
+                <BannerBtn>공고 확인하기</BannerBtn>
+              </BannerBox>
+            </SwiperSlide>
           </Swiper>
+        </Banner>
+
+        <Groups style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <GroupsTitle>이미 많은 기업 구성원들이 인프런에서 성장하고 있어요.</GroupsTitle>
+          <GroupsLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/c085de89-e640-4bc0-afad-efd1e96dbb58/%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB.png" alt="라인"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/0add4321-40e2-46db-9aac-3222b25a69c4/%E1%84%8B%E1%85%AE%E1%84%8B%E1%85%A1%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%92%E1%85%A7%E1%86%BC%E1%84%8C%E1%85%A6%E1%84%83%E1%85%B3%E1%86%AF.png" alt="우아한형제들"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/34618dc7-2862-4db0-9bbc-631ca0c8f5b5/sk.png" alt="sk"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/1429748f-8c44-4941-8913-752071578eaf/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.png" alt="네이버"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/e7dd4c2a-8496-4708-b9fd-ae66317e40ad/%E1%84%82%E1%85%A6%E1%86%A8%E1%84%89%E1%85%B3%E1%86%AB.png" alt="넥슨"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/10b49bf2-cd9a-4501-ac3c-84059d04f171/%E1%84%89%E1%85%A1%E1%86%B7%E1%84%89%E1%85%A5%E1%86%BC.png" alt="삼성"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/a041f2fa-7f40-4517-bdb7-822fc7800d80/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.png" alt="카카오"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/b47b4ead-5141-46ec-8003-81c6dbc2e5b7/LG.png" alt="LG"/>
+            </GLogo>
+            <GLogo>
+              <img src="https://cdn.inflearn.com/public/group_logo/0/4aa479b9-4e05-4f8e-84b3-1fb7edb60c0c/nc.png" alt="nc"/>
+            </GLogo>
+          </GroupsLogo>
+        </Groups>
+
+        <ApplySection style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <Container>
+            <Applymain>다양한 서비스를 신청하세요</Applymain>
+            <Applysub>인프런의 지식공유지 ' 비즈니스 ' 대학생 신청방법에 대해 알아보세요.</Applysub>
+            <ApplyCards>
+              <Apply>
+                <ATitle>
+                  지식공유자 되기
+                </ATitle>
+                <ADetail>
+                  9개월간 온라인 기술 강의로만 1억원!<br/>나의 지식을 나눠 사람들에게 배움의 기회를 주고, 의미있는 대가를 가져가세요.
+                </ADetail>
+                <ABtn>
+                  지식공유자 참여하기&nbsp;
+                  <i className="fa-solid fa-arrow-right"></i>
+                </ABtn>
+              </Apply>
+
+              <Apply>
+                <ATitle>
+                  인프런 비즈니스 신청
+                </ATitle>
+                <ADetail>
+                  모든 팀원의 인프런의 강의들을 자유롭게 학습하는 환경을 제공해주세요.<br/>업무 스킬에 집중된 콘텐츠를 통해 최신 트렌드의 업무역량을 습득할 수 있습니다.
+                </ADetail>
+                <ABtn>
+                  비즈니스 신청하기&nbsp;
+                  <i className="fa-solid fa-arrow-right"></i>
+                </ABtn>
+              </Apply>
+
+              <Apply>
+                <ATitle>
+                  인프런 X 대학생
+                </ATitle>
+                <ADetail>
+                  학교와 인프런이 함께 하여,<br/>많은 학생 분들께 정해진 커리큘럼 이외에도 필요한 학습을 보완하고, 더욱 성장할 수 있도록 도와드립니다.
+                </ADetail>
+                <ABtn>
+                  대학생 신청하기&nbsp;
+                  <i className="fa-solid fa-arrow-right"></i>
+                </ABtn>
+              </Apply>
+
+            </ApplyCards>
+          </Container>
+        </ApplySection>
+        <div style={loginShow?{filter:'blur(4px)'}:{filter:'blur(0)'}}>
+          <Footer>
+          </Footer>
         </div>
-      </section>
-      <section className="class-section">
-        <div className="class-container">
-          <div className="class-maintitle fw-b">
-            왕초보도 할 수 있어요 💪
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <div className="class-subtitle">이미 검증된 쉽고 친절한 입문 강의!!</div>
-          <Swiper modules={[Navigation]} navigation loop>
-            <SwiperSlide>
-              <div className="class-cards">{newbieLecturesList}</div>
-            </SwiperSlide>
-          </Swiper>  
-        </div>
-      </section>
-      <section className="class-section">
-        <div className="class-container">
-          <div className="class-maintitle fw-b">
-            기본부터 실무까지 제시해주는 로드맵 🏃🏻‍♀️
-            <span className="roadmap">RoadMap!!</span>
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <div className="class-subtitle">아무것도 몰라도 따라오다 보면 전문가가 될 수 있어요!</div>
-          <Swiper modules={[Navigation]} navigation loop>
-            <SwiperSlide>
-            <div className="class-cards">{roadLecturesList}</div>
-            </SwiperSlide>
-          </Swiper> 
-        </div>
-      </section>
-      <section className="class-section">
-        <div className="class-container">
-          <div className="class-maintitle fw-b">
-            읽어보기
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <div className="class-cards">
-            {readContentsList}
-          </div>
-        </div>
-      </section>
-      <section className="class-section">
-        <div className="class-container">
-          <div className="class-maintitle fw-b">
-            따끈따끈, 신규 강의를 만나보세요! 🙋🏻‍♀️
-            <span className="roadmap">NEW!!</span>
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-          <Swiper modules={[Navigation]} navigation loop>
-            <SwiperSlide>
-            <div className="class-cards">{newLecturesList}</div>
-            </SwiperSlide>
-          </Swiper> 
-        </div>
-      </section>
-
-      <ReviewSection>
-        <Container>
-          <LeftContent>
-            <H1><span style={{color:'#47C880'}}>964,904</span> 명이<br/>인프런과 함께합니다</H1>
-            <Textsmall>
-              인프런은 강의의 수강생수, 평점을 투명하게 공개합니다.
-              <br/>
-              실제로 많은 온오프라인 학원들은 단기적 성과를 높이기 위해 잘나온 특정 후기만 노출하거나, 
-              아예 숨겨버리는 경우가 많습니다.
-              <br/>
-              반면 인프런은 강의에 대한 후기, 학생수 등 정보를 투명하게 공개합니다.
-              신뢰성을 바탕으로 학습자들이 더 좋은 컨텐츠를 선택하고 교육의 질을 높입니다.
-            </Textsmall>
-            <MoreBtns>
-              <MoreBtn>수강평 더보기 <i className="fa-solid fa-chevron-right"></i></MoreBtn>
-              <MoreBtn>기능/강좌 요청하기 <i className="fa-solid fa-chevron-right"></i></MoreBtn>
-            </MoreBtns>
-          </LeftContent>
-          <RightContent>
-              {reviewList}
-          </RightContent>
-        </Container>
-      </ReviewSection>
-
-      <Banner>
-        <Swiper modules={[Autoplay]} autoplay={{delay: 3000}} speed={600} loop>
-          <SwiperSlide style={BannerStyle[0]}>
-            <BannerBox>
-              <BannerText>모든 팀원이 인프런의 강의들을<br/>자유롭게 학습하는 환경을 제공해주세요.</BannerText>
-              <BannerBtn>비즈니스 알아보기</BannerBtn>
-            </BannerBox>
-          </SwiperSlide>
-          <SwiperSlide style={BannerStyle[1]}>
-            <BannerBox>
-              <BannerText>지식을 나눠주세요.<br/>쉽게 시작하고 합당한 보상을 받을 수 있어요.</BannerText>
-              <BannerBtn>지식공유 알아보기</BannerBtn>
-            </BannerBox>
-          </SwiperSlide>
-          <SwiperSlide style={BannerStyle[2]}>
-            <BannerBox>
-              <BannerText style={{color:'white'}}>당신은 더 좋은 곳에 갈 수 있어요.<br/>지금 열려있는 채용공고를 확인해보세요.</BannerText>
-              <BannerBtn>공고 확인하기</BannerBtn>
-            </BannerBox>
-          </SwiperSlide>
-        </Swiper>
-      </Banner>
-
-      <Groups>
-        <GroupsTitle>이미 많은 기업 구성원들이 인프런에서 성장하고 있어요.</GroupsTitle>
-        <GroupsLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/c085de89-e640-4bc0-afad-efd1e96dbb58/%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB.png" alt="라인"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/0add4321-40e2-46db-9aac-3222b25a69c4/%E1%84%8B%E1%85%AE%E1%84%8B%E1%85%A1%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%92%E1%85%A7%E1%86%BC%E1%84%8C%E1%85%A6%E1%84%83%E1%85%B3%E1%86%AF.png" alt="우아한형제들"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/34618dc7-2862-4db0-9bbc-631ca0c8f5b5/sk.png" alt="sk"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/1429748f-8c44-4941-8913-752071578eaf/%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A5.png" alt="네이버"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/e7dd4c2a-8496-4708-b9fd-ae66317e40ad/%E1%84%82%E1%85%A6%E1%86%A8%E1%84%89%E1%85%B3%E1%86%AB.png" alt="넥슨"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/10b49bf2-cd9a-4501-ac3c-84059d04f171/%E1%84%89%E1%85%A1%E1%86%B7%E1%84%89%E1%85%A5%E1%86%BC.png" alt="삼성"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/a041f2fa-7f40-4517-bdb7-822fc7800d80/%E1%84%8F%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A9.png" alt="카카오"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/b47b4ead-5141-46ec-8003-81c6dbc2e5b7/LG.png" alt="LG"/>
-          </GLogo>
-          <GLogo>
-            <img src="https://cdn.inflearn.com/public/group_logo/0/4aa479b9-4e05-4f8e-84b3-1fb7edb60c0c/nc.png" alt="nc"/>
-          </GLogo>
-        </GroupsLogo>
-      </Groups>
-
-      <ApplySection>
-        <Container>
-          <Applymain>다양한 서비스를 신청하세요</Applymain>
-          <Applysub>인프런의 지식공유지 ' 비즈니스 ' 대학생 신청방법에 대해 알아보세요.</Applysub>
-          <ApplyCards>
-            <Apply>
-              <ATitle>
-                지식공유자 되기
-              </ATitle>
-              <ADetail>
-                9개월간 온라인 기술 강의로만 1억원!<br/>나의 지식을 나눠 사람들에게 배움의 기회를 주고, 의미있는 대가를 가져가세요.
-              </ADetail>
-              <ABtn>
-                지식공유자 참여하기&nbsp;
-                <i className="fa-solid fa-arrow-right"></i>
-              </ABtn>
-            </Apply>
-
-            <Apply>
-              <ATitle>
-                인프런 비즈니스 신청
-              </ATitle>
-              <ADetail>
-                모든 팀원의 인프런의 강의들을 자유롭게 학습하는 환경을 제공해주세요.<br/>업무 스킬에 집중된 콘텐츠를 통해 최신 트렌드의 업무역량을 습득할 수 있습니다.
-              </ADetail>
-              <ABtn>
-                비즈니스 신청하기&nbsp;
-                <i className="fa-solid fa-arrow-right"></i>
-              </ABtn>
-            </Apply>
-
-            <Apply>
-              <ATitle>
-                인프런 X 대학생
-              </ATitle>
-              <ADetail>
-                학교와 인프런이 함께 하여,<br/>많은 학생 분들께 정해진 커리큘럼 이외에도 필요한 학습을 보완하고, 더욱 성장할 수 있도록 도와드립니다.
-              </ADetail>
-              <ABtn>
-                대학생 신청하기&nbsp;
-                <i className="fa-solid fa-arrow-right"></i>
-              </ABtn>
-            </Apply>
-
-          </ApplyCards>
-        </Container>
-      </ApplySection>
-
-      <Footer>
-      </Footer>
     </>
   )
 };
