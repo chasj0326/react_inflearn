@@ -80,7 +80,6 @@ const Header = (props) => {
   ))
 
   const navigate = useNavigate();
-  const [blur, setBlur] = useState(false);
   const sendLoginShow = () => {
     props.getLoginShow(true)
   }

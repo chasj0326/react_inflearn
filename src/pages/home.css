@@ -30,6 +30,7 @@ body{
 }
 /* HEADER */
 header{
+  top: 0;
   height: 40px;
   width: 100%;
   background-color: #fff;
@@ -129,7 +130,6 @@ nav{
   border: 1px solid transparent;
   padding: 8px;
   width: 150px;
-  
 }
 .nav-searchbar input:hover{
   border-color: #dbdbdb;
@@ -284,6 +284,10 @@ nav{
   width: 580px;
   font-size: 16px;
   line-height: 1.5;
+}
+.search-bar input.active{
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
 }
 .search-bar input:focus{
   outline: unset;

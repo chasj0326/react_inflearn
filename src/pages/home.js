@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './home.css'
 import  styled  from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,6 +10,7 @@ import Scene from '../components/sceneComponent';
 import Header from '../components/header';
 import Footer from './../components/footer';
 import Login from './../components/loginModal';
+import { useNavigate } from 'react-router-dom';
 
 SwiperCore.use([Navigation,Pagination,Autoplay])
 
@@ -381,6 +382,34 @@ const Home = () => {
   const getLoginShow = () => {
     setLoginShow(!loginShow);
   }
+  const [searchShow, setSearchShow] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const searchHandler = (e) => {
+    setSearchValue(e.target.value);
+    setSearchShow(true);
+    if (e.target.value==""){
+      setSearchShow(false)
+    }
+  }
+  const searchRef = useRef();
+  useEffect(()=>{
+    function handleOutside(e){
+      if (searchRef.current && !searchRef.current.contains(e.target)){
+          setSearchShow(false)
+      }
+    }
+    document.addEventListener("mousedown", handleOutside);
+    return () =>{
+      document.removeEventListener("mousedown",handleOutside);
+    }
+  },[searchRef])
+  const navigate = useNavigate();
+  const goSearch = () => {
+    navigate({
+      pathname: '/courses',
+      search: `?s=${searchValue}`
+    })
+  }
   return(
     <>  
         {
@@ -406,8 +435,15 @@ const Home = () => {
           <div className="search-container">
             <div className="search-title">성장기회의 평등을 추구합니다</div>
             <div className="search-bar">
-              <input type="text" placeholder="배우고 싶은 지식을 입력해보세요."/>
-              <button><i className="fa-solid fa-magnifying-glass"></i></button>
+              <input ref={searchRef} type="text" className={searchShow?"active":""} onChange={searchHandler} placeholder="배우고 싶은 지식을 입력해보세요."/>
+              <button onClick={goSearch}><i className="fa-solid fa-magnifying-glass"></i></button>
+              {
+                searchShow?
+                <Result><span style={{color:'#1dc078'}}>{searchValue}</span>에 대한 검색 결과입니다</Result>
+                :
+                <Result style={{display:'none'}}></Result>
+              }
+              
             </div>
             <div className="search-tags">
               <div className="search-tag">#MVC</div>
@@ -629,6 +665,24 @@ const Home = () => {
 };
 
 export default Home;
+
+const Result = styled.div`
+  position: absolute;
+  top: 53px;
+  z-index: 9;
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid #dedede;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  border-top: unset;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+`
 
 const ReviewSection = styled.section`
   height: 528px;

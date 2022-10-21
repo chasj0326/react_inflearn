@@ -4,6 +4,7 @@ import Home from './pages/home';
 import Signup from './pages/signup'; 
 import FindAccount from './pages/find-account';
 import FindPassword from './pages/find-password';
+import Courses from './pages/courses';
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/find-account" element={<FindAccount/>}/>
           <Route path="/find-password" element={<FindPassword/>}/>
+          <Route path="/courses" element={<Courses/>}/>
         </Routes>
       </BrowserRouter>
     </>
